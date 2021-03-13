@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
     }
 
     searchCompany() {
+        this.company = null;
+
         this.api.retrieveEstablishment(this.siret).subscribe((response) => {
             this.company = response;
             this.areNoResults = false;

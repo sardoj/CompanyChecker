@@ -1,4 +1,4 @@
-<ActionBar title="Company Checker" icon="" class="action-bar bg-green-500 text-white">
+<ActionBar title="Company Checker" icon="" class="text-white bg-green-500 action-bar">
 </ActionBar>
 
 <StackLayout>
@@ -6,13 +6,13 @@
 
   <StackLayout class="p-12">
     <StackLayout class="text-center" *ngIf="areNoResults">
-      <Label text="Aucun résultat" textWrap="true" class="text-red-500 font-bold"></Label>
+      <Label text="Aucun résultat" textWrap="true" class="text-2xl font-bold text-red-500"></Label>
     </StackLayout>
 
     <StackLayout *ngIf="company">
-      <Label [text]="company.etablissement.unite_legale.denomination" textWrap="true" class="text-green-500 font-bold text-2xl text-center"></Label>
+      <Label [text]="company.etablissement.unite_legale.denomination" textWrap="true" class="text-xl font-bold text-center text-green-500"></Label>
 
-      <StackLayout class="bg-gray-100 rounded-lg p-4 my-6">
+      <StackLayout class="p-4 my-6 bg-gray-100 rounded-lg">
 
         <StackLayout class="mb-6">
           <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
@@ -23,6 +23,11 @@
           <Label [text]="company.etablissement.libelle_commune" textWrap="true"></Label>
         </StackLayout>
       </StackLayout>
+    </StackLayout>
+
+    <StackLayout class="mt-20 text-center" *ngIf="!company">
+      <Label text="&#xf002;" textWrap="true" class="mb-4 text-gray-300 text-8xl fas"></Label>
+      <Label text="Recherchez une entreprise" textWrap="true" class="text-2xl font-bold text-gray-300"></Label>
     </StackLayout>
   </StackLayout>
 </StackLayout>
