@@ -85,7 +85,7 @@ module.exports = env => {
   const tsConfigTnsName = 'tsconfig.tns.json';
   const tsConfigTnsPath = resolve(projectRoot, tsConfigTnsName);
   if (fs.existsSync(tsConfigTnsPath)) {
-    // support shared angular app configurations 
+    // support shared angular app configurations
     tsConfigName = tsConfigTnsName;
     tsConfigPath = tsConfigTnsPath;
   }
@@ -340,8 +340,9 @@ module.exports = env => {
               '@nativescript/webpack/helpers/style-hot-loader',
               {
                   loader: "@nativescript/webpack/helpers/css2json-loader",
-                  options: { useForImports: true }
+                  options: { useForImports: true },
               },
+              'postcss-loader',
           ],
         },
         {
@@ -390,7 +391,7 @@ module.exports = env => {
         process: 'global.process'
       }),
       // Remove all files from the out dir.
-      new CleanWebpackPlugin({ 
+      new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: itemsToClean,
         verbose: !!verbose
       }),
