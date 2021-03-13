@@ -1,5 +1,6 @@
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from "@angular/core";
+import { SearchBar } from '@nativescript/core';
 
 @Component({
     selector: "ns-home",
@@ -10,16 +11,45 @@ export class HomeComponent implements OnInit {
     // Documentation API: https://entreprise.data.gouv.fr/api_doc/sirene
 
     public company:any;
+    public siret:string;
+    public areNoResults:boolean;
 
     constructor(private api: ApiService) {}
 
     ngOnInit() {}
 
-    searchCompany() {
-        let siret: string = "52282368100047";
+    onClearSearch(args) {
+        this.clearNoResults();
+        this.clearCompany();
+    }
 
-        this.api.retrieveEstablishment(siret).subscribe((response) => {
+    clearNoResults() {
+        this.areNoResults = false;
+    }
+
+    clearCompany() {
+        this.company = null;
+    }
+
+    onSubmitSearch(args) {
+        if (this.isSiretNotEmpty()) {
+            this.searchCompany();
+        }
+    }
+
+    isSiretNotEmpty() {
+        return this.siret ? true : false;
+    }
+
+    searchCompany() {
+        this.api.retrieveEstablishment(this.siret).subscribe((response) => {
             this.company = response;
+            this.areNoResults = false;
+        },
+        (error) => {
+            if (error.error.message === 'no results found') {
+                this.areNoResults = true;
+            };
         });
     }
 }

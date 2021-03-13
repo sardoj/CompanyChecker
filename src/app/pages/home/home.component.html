@@ -1,21 +1,28 @@
-<ActionBar title="Accueil" icon="" class="action-bar">
+<ActionBar title="Company Checker" icon="" class="action-bar bg-green-500 text-white">
 </ActionBar>
 
-<StackLayout class="p-12">
-  <StackLayout class="bg-gray-100 rounded-lg p-4">
-    <StackLayout class="mb-6">
-      <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
-      <Label [text]="company.etablissement.siret" textWrap="true" *ngIf="company"></Label>
+<StackLayout>
+  <SearchBar id="searchBar" hint="SIRET" [(ngModel)]="siret" class="search-bar" (clear)="onClearSearch($event)" (submit)="onSubmitSearch($event)"></SearchBar>
+
+  <StackLayout class="p-12">
+    <StackLayout class="text-center" *ngIf="areNoResults">
+      <Label text="Aucun résultat" textWrap="true" class="text-red-500 font-bold"></Label>
     </StackLayout>
-    <StackLayout class="mb-6">
-      <Label text="Nom :" textWrap="true" class="font-semibold"></Label>
-      <Label [text]="company.etablissement.enseigne_1" textWrap="true" *ngIf="company"></Label>
-    </StackLayout>
-    <StackLayout class="mb-6">
-      <Label text="Commune :" textWrap="true" class="font-semibold"></Label>
-      <Label [text]="company.etablissement.libelle_commune" textWrap="true" *ngIf="company"></Label>
+
+    <StackLayout *ngIf="company">
+      <Label [text]="company.etablissement.unite_legale.denomination" textWrap="true" class="text-green-500 font-bold text-2xl text-center"></Label>
+
+      <StackLayout class="bg-gray-100 rounded-lg p-4 my-6">
+
+        <StackLayout class="mb-6">
+          <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
+          <Label [text]="company.etablissement.siret" textWrap="true"></Label>
+        </StackLayout>
+        <StackLayout class="mb-6">
+          <Label text="Commune :" textWrap="true" class="font-semibold"></Label>
+          <Label [text]="company.etablissement.libelle_commune" textWrap="true"></Label>
+        </StackLayout>
+      </StackLayout>
     </StackLayout>
   </StackLayout>
-
-  <Button text="Rechercher" (tap)="searchCompany()" class="p-4 mt-16 w-1/2 text-white rounded-lg bg-green-500 text-lg font-semibold"></Button>
 </StackLayout>
