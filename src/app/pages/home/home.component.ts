@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -11,15 +11,14 @@ export class HomeComponent implements OnInit {
 
     public company:any;
 
-    constructor(private http: HttpClient) {}
+    constructor(private api: ApiService) {}
 
     ngOnInit() {}
 
     searchCompany() {
-        let url: string = "https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/";
         let siret: string = "52282368100047";
 
-        this.http.get(url + siret).subscribe((response) => {
+        this.api.retrieveEstablishment(siret).subscribe((response) => {
             this.company = response;
         });
     }
