@@ -1,6 +1,21 @@
 <ActionBar title="Accueil" icon="" class="action-bar">
 </ActionBar>
 
-<StackLayout>
-  <Label class="font-bold text-red-500" text="this text should be bold and red!"></Label>
+<StackLayout class="p-12">
+  <StackLayout class="bg-gray-100 rounded-lg p-4">
+    <StackLayout class="mb-6">
+      <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
+      <Label [text]="company.etablissement.siret" textWrap="true" *ngIf="company"></Label>
+    </StackLayout>
+    <StackLayout class="mb-6">
+      <Label text="Nom :" textWrap="true" class="font-semibold"></Label>
+      <Label [text]="company.etablissement.enseigne_1" textWrap="true" *ngIf="company"></Label>
+    </StackLayout>
+    <StackLayout class="mb-6">
+      <Label text="Commune :" textWrap="true" class="font-semibold"></Label>
+      <Label [text]="company.etablissement.libelle_commune" textWrap="true" *ngIf="company"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <Button text="Rechercher" (tap)="searchCompany()" class="p-4 mt-16 w-1/2 text-white rounded-lg bg-green-500 text-lg font-semibold"></Button>
 </StackLayout>
