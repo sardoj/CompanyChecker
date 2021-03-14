@@ -10,36 +10,26 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    public searchEstablishments(params:any = null) {
-        return this.search('etablissements', params);
-    }
-
-    public searchLegalUnits(params:any = null) {
-        return this.search('unites_legales', params);
-    }
-
-    public retrieveEstablishment(siret:string) {
-        return this.retrieve('etablissements', siret);
-    }
-
-    public retrieveLegalUnit(siren:string) {
-        return this.retrieve('unites_legales', siren);
-    }
-
-    private search(type:string, params:any = null) {
+    public search(type:string, params?:string) {
         let url:string = this.buildUrl(type);
-        return this.http.get(url, {
-            params: params
-        });
+
+        if (params) {
+            url += params;
+        }
+
+        return this.http.get(url);
     }
 
-    private retrieve(type:string, siretOrSiren:string) {
+    public retrieve(type:string, siretOrSiren:string) {
         let url:string = this.buildUrl(type, siretOrSiren);
         return this.http.get(url);
     }
 
     private buildUrl(type:string, siretOrSiren?:string) {
-        return `${this.endpointUrl}/${type}/${siretOrSiren}`;
+        let url = `${this.endpointUrl}/${type}/`;
+        if (siretOrSiren) {
+            url += siretOrSiren;
+        }
+        return url;
     }
-
 }

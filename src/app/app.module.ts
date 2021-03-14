@@ -1,3 +1,4 @@
+import { AdvancedComponent } from './pages/advanced/advanced.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule } from "@nativescript/angular";
@@ -17,7 +18,8 @@ import { AppComponent } from "./app.component";
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        AdvancedComponent
    ],
     providers: [],
     schemas: [

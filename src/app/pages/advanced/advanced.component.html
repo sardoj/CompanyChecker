@@ -1,0 +1,35 @@
+<ActionBar title="Recherche avancée" icon="" class="text-white bg-green-500 action-bar">
+</ActionBar>
+
+<StackLayout>
+  <SearchBar id="searchBar" hint="Ville" [(ngModel)]="city" class="search-bar" (clear)="onClearSearch($event)" (submit)="onSubmitSearch($event)"></SearchBar>
+
+  <ScrollView>
+    <StackLayout class="p-12">
+      <StackLayout class="text-center" *ngIf="areNoResults">
+        <Label text="Aucun résultat" textWrap="true" class="text-2xl font-bold text-red-500"></Label>
+      </StackLayout>
+
+      <StackLayout>
+        <StackLayout class="p-4 my-3 bg-gray-100 rounded-lg" *ngFor="let establishment of establishment">
+          <StackLayout class="mb-3">
+            <Label [text]="establishment.unite_legale.denomination || '(Dénomination NC)'" textWrap="true" class="text-base font-semibold text-green-500"></Label>
+          </StackLayout>
+          <StackLayout class="mb-3" orientation="horizontal">
+            <Label text="SIREN : " textWrap="true" class="font-semibold"></Label>
+            <Label [text]="establishment.siren" textWrap="true"></Label>
+          </StackLayout>
+          <StackLayout orientation="horizontal">
+            <Label text="Date création : " textWrap="true" class="font-semibold"></Label>
+            <Label [text]="establishment.unite_legale.date_creation" textWrap="true"></Label>
+          </StackLayout>
+        </StackLayout>
+
+        <StackLayout class="mt-20 text-center" *ngIf="!establishment || establishment.length === 0">
+          <Label text="&#xf00e;" textWrap="true" class="mb-4 text-gray-300 text-8xl fas"></Label>
+          <Label text="Recherchez des entreprises" textWrap="true" class="text-2xl font-bold text-gray-300"></Label>
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</StackLayout>

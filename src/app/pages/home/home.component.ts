@@ -1,6 +1,8 @@
+import { EstablishmentRepository } from './../../repositories/establishment.service';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from "@angular/core";
 import { SearchBar } from '@nativescript/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: "ns-home",
@@ -14,16 +16,19 @@ export class HomeComponent implements OnInit {
     public siret:string;
     public areNoResults:boolean;
 
-    constructor(private api: ApiService) {}
+    constructor(
+        private establishmentRepository:EstablishmentRepository,
+        private router:Router
+    ) {}
 
     ngOnInit() {}
 
     onClearSearch(args) {
-        this.clearNoResults();
+        this.clearNoResultsMessage();
         this.clearCompany();
     }
 
-    clearNoResults() {
+    clearNoResultsMessage() {
         this.areNoResults = false;
     }
 
@@ -44,7 +49,7 @@ export class HomeComponent implements OnInit {
     searchCompany() {
         this.company = null;
 
-        this.api.retrieveEstablishment(this.siret).subscribe((response) => {
+        this.establishmentRepository.retrieve(this.siret).subscribe((response) => {
             this.company = response;
             this.areNoResults = false;
         },
@@ -53,5 +58,9 @@ export class HomeComponent implements OnInit {
                 this.areNoResults = true;
             };
         });
+    }
+
+    advancedSearch() {
+        this.router.navigateByUrl('/advanced');
     }
 }

@@ -1,4 +1,5 @@
 <ActionBar title="Company Checker" icon="" class="text-white bg-green-500 action-bar">
+  <ActionItem icon="font://&#xf00e;" class="text-lg fas" ios.position="right" (tap)="advancedSearch()"></ActionItem>
 </ActionBar>
 
 <StackLayout>
@@ -10,17 +11,33 @@
     </StackLayout>
 
     <StackLayout *ngIf="company">
-      <Label [text]="company.etablissement.unite_legale.denomination" textWrap="true" class="text-xl font-bold text-center text-green-500"></Label>
+      <Label [text]="company.etablissement.unite_legale.denomination || '(Nom N.C.)'" textWrap="true" class="text-xl font-bold text-center text-green-500"></Label>
 
-      <StackLayout class="p-4 my-6 bg-gray-100 rounded-lg">
-
-        <StackLayout class="mb-6">
-          <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
+      <StackLayout class="p-4 my-3 bg-gray-100 rounded-lg">
+        <StackLayout class="mb-3" orientation="horizontal">
+          <Label text="SIRET : " textWrap="true" class="font-semibold"></Label>
           <Label [text]="company.etablissement.siret" textWrap="true"></Label>
         </StackLayout>
-        <StackLayout class="mb-6">
-          <Label text="Commune :" textWrap="true" class="font-semibold"></Label>
+        <StackLayout class="mb-3" orientation="horizontal">
+          <Label text="N° TVA : " textWrap="true" class="font-semibold"></Label>
+          <Label [text]="company.etablissement.unite_legale.numero_tva_intra" textWrap="true"></Label>
+        </StackLayout>
+        <StackLayout class="mb-3" orientation="horizontal">
+          <Label text="Commune : " textWrap="true" class="font-semibold"></Label>
           <Label [text]="company.etablissement.libelle_commune" textWrap="true"></Label>
+        </StackLayout>
+        <StackLayout class="mb-3">
+          <Label text="Adresse :" textWrap="true" class="font-semibold"></Label>
+          <StackLayout orientation="horizontal">
+            <Label [text]="company.etablissement.numero_voie" textWrap="true"></Label>
+            <Label [text]="company.etablissement.type_voie" textWrap="true" class="ml-2"></Label>
+            <Label [text]="company.etablissement.libelle_voie" textWrap="true" class="ml-2"></Label>
+          </StackLayout>
+          <Label [text]="company.etablissement.complement_adresse" textWrap="true"></Label>
+          <StackLayout orientation="horizontal">
+            <Label [text]="company.etablissement.code_postal" textWrap="true"></Label>
+            <Label [text]="company.etablissement.libelle_commune" textWrap="true" class="ml-2"></Label>
+          </StackLayout>
         </StackLayout>
       </StackLayout>
     </StackLayout>
