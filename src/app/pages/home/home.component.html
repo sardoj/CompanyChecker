@@ -2,14 +2,14 @@
 </ActionBar>
 
 <StackLayout class="p-12">
-  <StackLayout class="bg-gray-100 rounded-lg p-4">
+  <StackLayout class="p-4 bg-gray-100 rounded-lg">
     <StackLayout class="mb-6">
       <Label text="SIRET :" textWrap="true" class="font-semibold"></Label>
       <Label [text]="company.etablissement.siret" textWrap="true" *ngIf="company"></Label>
     </StackLayout>
     <StackLayout class="mb-6">
       <Label text="Nom :" textWrap="true" class="font-semibold"></Label>
-      <Label [text]="company.etablissement.enseigne_1" textWrap="true" *ngIf="company"></Label>
+      <Label [text]="company.etablissement.unite_legale.denomination" textWrap="true" *ngIf="company"></Label>
     </StackLayout>
     <StackLayout class="mb-6">
       <Label text="Commune :" textWrap="true" class="font-semibold"></Label>
@@ -17,5 +17,5 @@
     </StackLayout>
   </StackLayout>
 
-  <Button text="Rechercher" (tap)="searchCompany()" class="p-4 mt-16 w-1/2 text-white rounded-lg bg-green-500 text-lg font-semibold"></Button>
+  <Button text="Rechercher" (tap)="searchCompany()" class="w-1/2 p-4 mt-16 text-lg font-semibold text-white bg-green-500 rounded-lg"></Button>
 </StackLayout>
